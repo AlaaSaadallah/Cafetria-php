@@ -1,146 +1,200 @@
-CREATE DATABASE  IF NOT EXISTS `cafetria` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `cafetria`;
--- MySQL dump 10.13  Distrib 8.0.22, for Win64 (x86_64)
+-- phpMyAdmin SQL Dump
+-- version 5.1.1
+-- https://www.phpmyadmin.net/
 --
--- Host: localhost    Database: cafetria
--- ------------------------------------------------------
--- Server version	5.7.31
+-- Host: 127.0.0.1
+-- Generation Time: Aug 09, 2021 at 11:30 PM
+-- Server version: 10.4.19-MariaDB
+-- PHP Version: 7.4.20
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `cafetria`
+--
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `order-product`
 --
 
-DROP TABLE IF EXISTS `order-product`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `order-product` (
   `OID` int(100) NOT NULL,
   `PID` int(100) NOT NULL,
-  `Quantity` int(100) NOT NULL,
-  PRIMARY KEY (`OID`,`PID`),
-  KEY `PID` (`PID`)
+  `Quantity` int(100) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `order-product`
 --
 
-LOCK TABLES `order-product` WRITE;
-/*!40000 ALTER TABLE `order-product` DISABLE KEYS */;
-INSERT INTO `order-product` VALUES (67,3,1),(66,1,1),(65,1,1),(64,6,2),(64,5,1),(63,2,1);
-/*!40000 ALTER TABLE `order-product` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `order-product` (`OID`, `PID`, `Quantity`) VALUES
+(79, 10, 1),
+(79, 5, 1),
+(76, 5, 1),
+(75, 7, 1),
+(75, 6, 1),
+(75, 5, 1),
+(74, 8, 1),
+(74, 11, 1),
+(74, 12, 1),
+(74, 7, 1),
+(73, 10, 1),
+(73, 9, 1),
+(73, 11, 1),
+(72, 5, 1),
+(72, 7, 1),
+(72, 10, 1),
+(78, 6, 1),
+(78, 7, 3),
+(79, 11, 1),
+(79, 12, 1),
+(79, 8, 2);
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `orders`
 --
 
-DROP TABLE IF EXISTS `orders`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `orders` (
-  `OID` int(100) NOT NULL AUTO_INCREMENT,
+  `OID` int(100) NOT NULL,
   `OrderDate` datetime DEFAULT NULL,
   `Status` varchar(50) NOT NULL,
   `UserId` int(100) DEFAULT NULL,
-  PRIMARY KEY (`OID`),
-  KEY `UserId` (`UserId`)
-) ENGINE=MyISAM AUTO_INCREMENT=68 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+  `TotalPrice` int(11) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `orders`
 --
 
-LOCK TABLES `orders` WRITE;
-/*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-INSERT INTO `orders` VALUES (63,'2021-01-02 10:11:59','pending',1),(64,'2021-01-02 10:12:32','pending',1),(65,'2021-01-02 10:13:58','pending',4),(66,'2021-01-04 14:27:33','pending',2),(67,'2021-01-04 14:27:40','pending',2);
-/*!40000 ALTER TABLE `orders` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `orders` (`OID`, `OrderDate`, `Status`, `UserId`, `TotalPrice`) VALUES
+(75, '2021-01-06 19:20:16', 'deliverd', 5, 150),
+(74, '2021-01-06 19:20:03', 'deliverd', 2, 100),
+(73, '2021-01-06 19:19:47', 'pending', 4, 180),
+(72, '2021-01-06 19:19:26', 'deliverd', 1, 150),
+(76, '2021-01-06 20:47:20', 'pending', 4, NULL),
+(79, '2021-06-04 14:26:23', 'pending', 4, NULL),
+(78, '2021-06-04 14:21:56', 'pending', 4, NULL);
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `products`
 --
 
-DROP TABLE IF EXISTS `products`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `products` (
-  `PID` int(100) NOT NULL AUTO_INCREMENT,
+  `PID` int(100) NOT NULL,
   `Pname` varchar(30) NOT NULL,
   `Price` float NOT NULL,
   `Category` varchar(100) NOT NULL,
-  `PPicPath` varchar(50) NOT NULL,
-  PRIMARY KEY (`PID`)
-) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+  `PPicPath` varchar(50) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `products`
 --
 
-LOCK TABLES `products` WRITE;
-/*!40000 ALTER TABLE `products` DISABLE KEYS */;
-INSERT INTO `products` VALUES (1,'tea',20,'hot drinks','tea.jpg'),(2,'coffee',15,'hot drinks','coffee_shutterstock.jpg'),(3,'latte',40,'hot drinks','latte.jpg'),(4,'Cappuccino',50,'hot drinks','images.jpg'),(5,'Ice Coffee',40,'cold drinks','icecofee.jpg'),(6,'Ice Chocolate',50,'cold drinks','icechocolate.jpg'),(7,'MilkShake',60,'cold drinks','milkshake.jpeg'),(8,'Fresh Orange',35,'cold drinks','freshorange.webp'),(9,'cheese cake',60,'desserts','cheesecake.jpg'),(10,'strawberycake',60,'desserts','strawberycake.jpg'),(11,'blueberrycake',60,'desserts','blueberrycake.jpg'),(12,'frenchdesserts',40,'desserts','frenchdesserts.jpg');
-/*!40000 ALTER TABLE `products` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `products` (`PID`, `Pname`, `Price`, `Category`, `PPicPath`) VALUES
+(18, 'cold tea', 15, 'Cold Drinks', 'tea.jpg'),
+(5, 'Ice Coffee', 40, 'cold drinks', 'icecofee.jpg'),
+(6, 'Ice Chocolate', 50, 'cold drinks', 'icechocolate.jpg'),
+(7, 'MilkShake', 60, 'cold drinks', 'milkshake.jpeg'),
+(8, 'Fresh Orange', 35, 'cold drinks', 'freshorange.webp'),
+(9, 'cheese cake', 60, 'desserts', 'cheesecake.jpg'),
+(10, 'strawberycake', 60, 'desserts', 'strawberycake.jpg'),
+(11, 'blueberrycake', 60, 'desserts', 'blueberrycake.jpg'),
+(17, 'cold tea', 15, 'Cold Drinks', 'tea.jpg');
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `systemuser`
 --
 
-DROP TABLE IF EXISTS `systemuser`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `systemuser` (
-  `UID` int(100) NOT NULL AUTO_INCREMENT,
+  `UID` int(100) NOT NULL,
   `Name` varchar(100) NOT NULL,
   `Email` varchar(100) NOT NULL,
   `Password` varchar(100) NOT NULL,
   `RoomNo` int(100) NOT NULL,
   `Ext` varchar(100) NOT NULL,
-  `role` varchar(20) DEFAULT NULL,
-  PRIMARY KEY (`UID`)
-) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+  `role` varchar(20) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `systemuser`
 --
 
-LOCK TABLES `systemuser` WRITE;
-/*!40000 ALTER TABLE `systemuser` DISABLE KEYS */;
-INSERT INTO `systemuser` VALUES (1,'ahmed','ahmedsheblwafa@gmail.com','0502215477',4,'1000','admin'),(2,'alaaahmed','alaaahmed@gmail.com','0502215477',4,'1005','user'),(3,'Nirdeennaeem','nirdeen@gmail.com','0502215477',5,'1002','user'),(4,'moustafamahmoud','moustafa@gmail.com','0502215477',3,'1000','user'),(5,'alaaali','alaa@gmail.com','0502215477',2,'1001','user');
-/*!40000 ALTER TABLE `systemuser` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `systemuser` (`UID`, `Name`, `Email`, `Password`, `RoomNo`, `Ext`, `role`) VALUES
+(1, 'admin', 'admin@gmail.com', '12345678', 1000, '666', 'admin'),
+(2, 'user1', 'user1@gmail.com', '12345678', 5, '1005', 'user'),
+(4, 'user2', 'user2@gmail.com', '12345678', 33, '1000', 'user'),
+(5, 'user3', 'user3@gmail.com', '12345678', 2, '1001', 'user');
 
 --
--- Dumping events for database 'cafetria'
+-- Indexes for dumped tables
 --
 
 --
--- Dumping routines for database 'cafetria'
+-- Indexes for table `order-product`
 --
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+ALTER TABLE `order-product`
+  ADD PRIMARY KEY (`OID`,`PID`),
+  ADD KEY `PID` (`PID`);
 
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+--
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`OID`),
+  ADD KEY `UserId` (`UserId`);
+
+--
+-- Indexes for table `products`
+--
+ALTER TABLE `products`
+  ADD PRIMARY KEY (`PID`);
+
+--
+-- Indexes for table `systemuser`
+--
+ALTER TABLE `systemuser`
+  ADD PRIMARY KEY (`UID`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `OID` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
+
+--
+-- AUTO_INCREMENT for table `products`
+--
+ALTER TABLE `products`
+  MODIFY `PID` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
+-- AUTO_INCREMENT for table `systemuser`
+--
+ALTER TABLE `systemuser`
+  MODIFY `UID` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2021-01-04 16:27:15
